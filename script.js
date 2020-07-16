@@ -87,8 +87,9 @@ var questionArray = [{
         choiceb: '3',
         choicec: '4',
         choiced: '22',
-    correctAnswer: 'choicea'
-    }
+    },
+    correctAnswer: '2'
+    
 }];
 
 function startGame() {
@@ -133,20 +134,23 @@ function getUserChoice(event) {
     console.log("clicked")
     var userChoice = event.target.textContent;
     console.log(userChoice);
+    showResults(userChoice);
 }
 
 
-function showResults() {
-    answerContainer = getElementById('answer-buttons');
+function showResults(userChoice) {
+    answerContainer =document.getElementById('answer-buttons');
     // empty variable for user choice, and variable to keep track of score
-    var userChoice = ''
+    
     var score = 0
 
     //Loop through each question and answers
     for (i = 0; i < questionArray.length; i++) {
-        userChoice = answerContainer.children(i).value
+        
+        
+
     // Conditional to decide of userChoice === questionArray[i].answers.correctAnswer
-        if (userChoice===questionArray[i].correctAnswer) {
+    if (userChoice===questionArray[i].correctAnswer) {
             score++;
             nextQuestion();
             console.log(score);
@@ -155,4 +159,4 @@ function showResults() {
     }
 
 
-
+}
