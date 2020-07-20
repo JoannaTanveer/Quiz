@@ -6,9 +6,6 @@ I achieved what I have with the help of my tutor Anthony and watching the youtub
 
 The questions were cut and pasted from href: https://www.funtrivia.com/trivia/SciTech/Software-and-Programming-5518_3.html
 
+
+![screenshot](./Assets/quiz_screenshot.png)
 This is a link to the quiz app:
-
-
-This is a screen shot of the quiz app:
-
-
