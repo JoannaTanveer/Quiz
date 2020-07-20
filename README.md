@@ -4,11 +4,11 @@ This is a fun application that has a few questions and a timer. When the timer i
 
 I achieved what I have with the help of my tutor Anthony and watching the youtube video https://youtu.be/riDzcEQbX6k  , and the website  https://simplestepscode.com/javascript-quiz-tutorial/   .
 
-The questions were cut and pasted from href: https://www.funtrivia.com/trivia/SciTech/Software-and-Programming-5518_3.html
+The questions were cut and pasted from https://www.funtrivia.com/trivia/SciTech/Software-and-Programming-5518_3.html
 
 This is a link to the quiz app:
+https://joannatanveer.github.io/Quiz/
 
 
-This is a screen shot of the quiz app:
 
 
