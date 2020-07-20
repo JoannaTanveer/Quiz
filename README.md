@@ -12,3 +12,5 @@ https://joannatanveer.github.io/Quiz/
 
 
 
+![screenshot](./Assets/quiz_screenshot.png)
+This is a link to the quiz app:
