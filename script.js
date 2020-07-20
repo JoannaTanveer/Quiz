@@ -10,51 +10,76 @@ var buttonDText = document.getElementById("btn-D");
 var answerContainer = document.getElementById('answer-buttons');
 var scoreOutput = document.getElementById('userScore');
 var score = 0
-
+var li1 = document.createElement("li");
+var li2 = document.createElement("li");
+var li3 = document.createElement("li");
+var li4 = document.createElement("li");
 
 
 startButton.addEventListener('click', startGame);
- var questionCounter = 0
+var questionCounter = 0
 
 var questionArray = [{
-    question: 'What is 2 = 2',
+    question: 'Which of these is a Python control flow statement type?',
     answers: {
-        choicea: '2',
-        choiceb: '3',
-        choicec: '4',
-        choiced: '22',
+        choicea: 'else if',
+        choiceb: 'elsif',
+        choicec: 'case',
+        choiced: 'elif',
     },
-    correctAnswer: '2',
+    correctAnswer: 'elif',
 },
 {
-    question: 'What is my name',
+    question: 'Who was the child of a famous poet and English mathematician whom many historians consider the first programmer?',
     answers: {
-        choicea: '2',
-        choiceb: 'Joanna',
-        choicec: '4',
-        choiced: '22',
+        choicea: 'Ada Lovelace',
+        choiceb: 'Steve Jobs',
+        choicec: 'Florence Nightengale',
+        choiced: 'Monty Python',
     },
-    correctAnswer: 'Joanna',
+    correctAnswer: 'Ada Lovelace',
 },
 {
-    question: 'What is my cats name',
+    question: 'The company that developed the original software upon which Google Earth is based, Keyhole, Inc., acquired some of its initial funding from which secretive US government agency?',
     answers: {
-        choicea: '2',
-        choiceb: '3',
-        choicec: 'Chubby',
-        choiced: '22',
+        choicea: 'FBI',
+        choiceb: 'CIA',
+        choicec: 'NASA',
+        choiced: 'Coast Guard',
     },
-    correctAnswer: 'Chubby',
+    correctAnswer: 'CIA',
 },
 {
-    question: 'Where do i live',
+    question: 'I wish I knew who else is doing work on this system so that I could get some help on a question I have. What is the command to list all the users currently on the system?',
     answers: {
-        choicea: '2',
-        choiceb: '3',
-        choicec: '4',
-        choiced: 'issaquah',
+        choicea: 'question',
+        choiceb: 'work',
+        choicec: 'system',
+        choiced: 'who',
     },
-    correctAnswer: 'issaquah',
+    correctAnswer: 'who',
+
+},
+{
+    question: 'Which of the following data structures falls under the category of a dictionary?',
+    answers: {
+        choicea: 'Tree',
+        choiceb: 'hash',
+        choicec: 'Linked list',
+        choiced: 'Hash table',
+    },
+    correctAnswer: 'Hash table',
+
+},
+{
+    question: 'Which of the following operators has the highest precedence?',
+    answers: {
+        choicea: '*',
+        choiceb: '&&',
+        choicec: '!',
+        choiced: '!=',
+    },
+    correctAnswer: '!',
 
 }];
 
@@ -64,7 +89,7 @@ function startGame() {
     displayQuestion()
     timer()
 }
-
+//Displays question on question card, and answer buttons
 function displayQuestion() {
 
 
@@ -86,15 +111,15 @@ function displayQuestion() {
 
 }
 
-
-var timeTotal = 3;
+// Timer function
+var timeTotal = 30;
 function timer() {
     var setTimer = setInterval(function () {
 
         document.getElementById('timeLeft').innerHTML = `Time Left: ${timeTotal}`
         if (timeTotal <= 0) {
             clearInterval(setTimer)
-            document.getElementById('timeLeft').innerHTML = `Time's Up! Your score is ${ score }`;
+            document.getElementById('timeLeft').innerHTML = `Time's Up! Your score is ${score}`;
             saveButton();
         } else {
             timeTotal--
@@ -111,56 +136,54 @@ function timer() {
 answerContainer.addEventListener("click", getUserChoice);
 
 function getUserChoice(event) {
-        console.log("clicked")
-        var userChoice = event.target.textContent;
-        console.log(userChoice);
-        showResults(userChoice);
+    
+    var userChoice = event.target.textContent;
+    
+    showResults(userChoice);
+}
+
+//Function to call once the timer has run out
+function showResults(userChoice) {
+    answerContainer = document.getElementById('answer-buttons');
+
+
+    // Conditional to decide of userChoice === questionArray[i].answers.correctAnswer
+    if (userChoice === questionArray[questionIndex].correctAnswer) {
+        questionIndex++
+        score++;
+        displayQuestion();
+
+        document.getElementById('userScore').innerHTML = `Score: ${score}`
+    } else {
+        questionIndex++ //Increase question Index to go to the next question
+        timeTotal--
+        displayQuestion()
     }
 
 
-function showResults(userChoice) {
-    answerContainer = document.getElementById('answer-buttons');
-    //variable to keep track of score
-
-    
-
-    //Loop through each question and answers
-    // for (i = 0; i < questionArray.length; i++) {
-    
-    // Conditional to decide of userChoice === questionArray[i].answers.correctAnswer
-    if (userChoice === questionArray[questionIndex].correctAnswer) {
-        questionIndex++    
-        score++;
-        displayQuestion();  
-            console.log(score);
-            document.getElementById('userScore').innerHTML = `Score: ${score}`
-        } else {
-            questionIndex++
-            timeTotal--
-            displayQuestion()
-        }
-    
-
 
 };
-
-
-function saveButton () {
+// New table to pop-up when time is up, quiz card hides
+var table = document.getElementById('highScore-table');
+function saveButton() {
 
     var userName = prompt('What is your gamer name?');
     var hideClass = document.getElementById('highScore-container');
     hideClass.classList.remove('hide');
-    
-    var questionContainer=document.getElementById('question-container');
+
+    var questionContainer = document.getElementById('question-container');
     questionContainer.classList.add('hide');
-    
-    // var saveButton = document.getElementById('save-btn');
-    // saveButton.addEventListener('click', saveScore ())
-    var user = {  
-        name:userName,
-        score:score
-      }
-   
-    
-    window.localStorage.setItem( "highScore",JSON.stringify(user));
+
+//This group of code it to get the user name and score to populate on a table
+    var highScoreEntry = (`${userName} : ${score}`)
+    window.localStorage.setItem(`${userName}`, JSON.stringify(highScoreEntry));
+
+
+    var li = document.createElement('li');
+    var highStorage = window.localStorage.getItem(`${userName}`);
+    li.append(highStorage);
+
 }
+
+
+
